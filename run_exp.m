@@ -19,7 +19,7 @@ for iter = 1:10 %10 repititions
     for i = 1:length(nim)
         ni = nim(i);
         tic_start_coeff = tic;
-        [ coeffw, Binv, BD, c, R, mean_est ] = FBwhiten(noisy(:, :, 1:nim(i))); %coeffw is the steerable PCA expansion coefficients of whitened image
+        [ coeffw, Binv, BD, c, R, mean_est ] = FBwhiten(noisy(:, :, 1:nim(i)), c); %coeffw is the steerable PCA expansion coefficients of whitened image
         toc_coeff = toc(tic_start_coeff);
         
         tic_start_sePCA = tic;

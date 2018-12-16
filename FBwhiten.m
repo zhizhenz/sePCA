@@ -1,4 +1,4 @@
-function [ coeffw, Binv, BD, c, R, mean_est ] = FBwhiten(data)
+function [ coeffw, Binv, BD, c, R, mean_est ] = FBwhiten(data, c)
 %Description
 %Get Fourier expansion coefficients after whitening     
 %    Input:
@@ -15,7 +15,6 @@ L = size(data, 1); %size of the images
 r = sqrt(x.^2 + y.^2);
 
 R = est_support(data, 0.99); %Support size
-c = 0.5; %Bandlimit is 0.5
 mean_img = mean(data, 3);
 n_r = ceil(4*c*R);
 [ basis, sample_points ] = precomp_fb( n_r, R, c );
@@ -39,7 +38,7 @@ clear whiten
 max_ang_freqs = size(coeffw, 1) - 1;
 Binv = cell(max_ang_freqs + 1, 1);
 [ r2, w2 ] = lgwt(length(r), 0, R);
-[ fn ] = IFT_FB_radial(r2, c2, R);
+[ fn ] = IFT_FB_radial(r2, c, R);
 w2 = r2.*w2;
 
 load bessel.mat
